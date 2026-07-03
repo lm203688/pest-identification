@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_model": "农识通",
+  "name_for_human": "农识通",
+  "description_for_model": "AI病虫害识别平台，82种病虫害知识库",
+  "description_for_human": "AI病虫害识别平台，82种病虫害知识库",
+  "api": {
+    "type": "openapi",
+    "url": "http://150.158.119.19:3002/openapi.json",
+    "has_user_authentication": false
+  },
+  "usage_policy": "免费层每IP 3次/天，付费层需API Key",
+  "pricing": "免费3次/天识别 + 知识库免费浏览",
+  "auth": {
+    "type": "none"
+  },
+  "contact_email": "support@aishield.tools"
+}
