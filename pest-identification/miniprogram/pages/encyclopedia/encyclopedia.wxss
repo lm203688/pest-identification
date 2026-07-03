@@ -1,0 +1,116 @@
+/* pages/encyclopedia/encyclopedia.wxss */
+.container {
+  padding: var(--spacing-md);
+  padding-bottom: 180rpx;
+}
+
+.search-bar {
+  margin-bottom: var(--spacing-sm);
+}
+
+.search-input {
+  background: var(--color-bg-secondary);
+  border: 1rpx solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 20rpx 28rpx;
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+}
+
+.search-placeholder {
+  color: var(--color-text-muted);
+}
+
+.filters {
+  margin-bottom: var(--spacing-md);
+}
+
+.filter-scroll {
+  white-space: nowrap;
+  margin-bottom: var(--spacing-xs);
+}
+
+.filter-chip {
+  display: inline-block;
+  padding: 12rpx 28rpx;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-secondary);
+  margin-right: 12rpx;
+}
+
+.filter-chip.active {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.type-filter {
+  display: flex;
+  gap: 12rpx;
+}
+
+.type-chip {
+  padding: 8rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  color: var(--color-text-muted);
+  background: var(--color-bg-secondary);
+}
+
+.type-chip.active {
+  color: #fff;
+}
+
+.type-chip.type-disease.active {
+  background: var(--color-disease);
+}
+
+.type-chip.type-pest.active {
+  background: var(--color-pest);
+}
+
+.pest-card {
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.pest-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.pest-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.pest-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.pest-summary {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 8rpx;
+}
+
+.pest-crops-text {
+  font-size: 22rpx;
+  color: var(--color-text-muted);
+}
+
+.load-more {
+  text-align: center;
+  padding: var(--spacing-md);
+  color: var(--color-accent);
+  font-size: 26rpx;
+}

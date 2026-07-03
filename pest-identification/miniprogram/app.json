@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/identify/identify",
+    "pages/result/result",
+    "pages/encyclopedia/encyclopedia",
+    "pages/detail/detail",
+    "pages/history/history"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1B4332",
+    "navigationBarTitleText": "农识通",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0A1F14",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#8BA89A",
+    "selectedColor": "#52B788",
+    "backgroundColor": "#0A1F14",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab_home.png",
+        "selectedIconPath": "images/tab_home_active.png"
+      },
+      {
+        "pagePath": "pages/identify/identify",
+        "text": "识别",
+        "iconPath": "images/tab_camera.png",
+        "selectedIconPath": "images/tab_camera_active.png"
+      },
+      {
+        "pagePath": "pages/encyclopedia/encyclopedia",
+        "text": "百科",
+        "iconPath": "images/tab_book.png",
+        "selectedIconPath": "images/tab_book_active.png"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "记录",
+        "iconPath": "images/tab_history.png",
+        "selectedIconPath": "images/tab_history_active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

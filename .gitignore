@@ -1,0 +1,5 @@
+pest-identification/server/.env
+pest-identification/server/node_modules/
+*.log
+__pycache__/
+

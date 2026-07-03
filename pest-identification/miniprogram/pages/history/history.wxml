@@ -1,0 +1,22 @@
+<!-- pages/history/history.wxml - 识别记录 -->
+<view class="container">
+  <view class="header">
+    <text class="header-title">识别记录</text>
+  </view>
+
+  <view class="record-list" wx:if="{{records.length > 0}}">
+    <view class="record-card card" wx:for="{{records}}" wx:key="id" bindtap="goDetail" data-id="{{item.result_pest_id}}">
+      <view class="record-top">
+        <text class="record-name">{{item.result_name || '未知'}}</text>
+        <text class="record-confidence">{{item.confidence}}%</text>
+      </view>
+      <text class="record-time">{{item.created_at}}</text>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{records.length === 0 && !loading}}">
+    <text class="icon">📋</text>
+    <text>还没有识别记录</text>
+    <text class="empty-hint">拍照识别后会自动保存</text>
+  </view>
+</view>

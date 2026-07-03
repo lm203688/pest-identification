@@ -1,0 +1,57 @@
+<!-- pages/detail/detail.wxml - 病虫害详情页 -->
+<view class="container" wx:if="{{pest}}">
+  <!-- 头部 -->
+  <view class="detail-header">
+    <text class="detail-name">{{pest.name}}</text>
+    <view class="detail-tags">
+      <text class="{{pest.type === '病害' ? 'tag-disease' : 'tag-pest'}}">{{pest.type}}</text>
+      <text class="crop-tag" wx:for="{{crops}}" wx:key="id">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 别名 -->
+  <view class="aliases" wx:if="{{pest.aliases}}">
+    <text class="alias-label">别名：</text>
+    <text class="alias-text">{{pest.aliases}}</text>
+  </view>
+
+  <!-- 简介 -->
+  <view class="section card" wx:if="{{pest.summary}}">
+    <text class="section-title">简介</text>
+    <text class="section-content">{{pest.summary}}</text>
+  </view>
+
+  <!-- 症状 -->
+  <view class="section card" wx:if="{{pest.symptoms}}">
+    <text class="section-title">症状识别</text>
+    <text class="section-content">{{pest.symptoms}}</text>
+  </view>
+
+  <!-- 发病条件 -->
+  <view class="section card" wx:if="{{pest.conditions}}">
+    <text class="section-title">发病条件</text>
+    <text class="section-content">{{pest.conditions}}</text>
+  </view>
+
+  <!-- 防治方案 -->
+  <view class="section card" wx:if="{{pest.prevention}}">
+    <text class="section-title">防治方案</text>
+    <text class="section-content">{{pest.prevention}}</text>
+  </view>
+
+  <!-- 推荐用药 -->
+  <view class="section card medicine-card" wx:if="{{pest.medicine}}">
+    <text class="section-title">推荐用药</text>
+    <text class="section-content">{{pest.medicine}}</text>
+    <view class="medicine-warning">
+      <text class="warning-icon">⚠️</text>
+      <text class="warning-text">用药请遵循当地农技部门指导，注意安全间隔期</text>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-actions">
+    <view class="btn-primary" bindtap="goIdentify">拍照识别</view>
+    <button class="btn-secondary share-btn" open-type="share">分享给农友</button>
+  </view>
+</view>

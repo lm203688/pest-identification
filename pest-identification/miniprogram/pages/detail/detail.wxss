@@ -1,0 +1,114 @@
+/* pages/detail/detail.wxss */
+.container {
+  padding: var(--spacing-md);
+  padding-bottom: 200rpx;
+}
+
+.detail-header {
+  margin-bottom: var(--spacing-md);
+}
+
+.detail-name {
+  display: block;
+  font-size: 44rpx;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.detail-tags {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.crop-tag {
+  font-size: 22rpx;
+  color: var(--color-accent);
+  background: rgba(82, 183, 136, 0.1);
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+.aliases {
+  margin-bottom: var(--spacing-md);
+  font-size: 26rpx;
+}
+
+.alias-label {
+  color: var(--color-text-muted);
+}
+
+.alias-text {
+  color: var(--color-text-secondary);
+}
+
+.section {
+  margin-bottom: var(--spacing-md);
+}
+
+.section-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-content {
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.medicine-card {
+  border-left: 6rpx solid var(--color-warning);
+}
+
+.medicine-warning {
+  display: flex;
+  align-items: flex-start;
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: rgba(244, 162, 97, 0.1);
+  border-radius: var(--radius-sm);
+}
+
+.warning-icon {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+
+.warning-text {
+  font-size: 22rpx;
+  color: var(--color-warning);
+  line-height: 1.5;
+}
+
+.bottom-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-bg-primary);
+  border-top: 1rpx solid var(--color-border);
+  padding-bottom: calc(var(--spacing-sm) + env(safe-area-inset-bottom));
+}
+
+.bottom-actions .btn-primary,
+.bottom-actions .btn-secondary {
+  flex: 1;
+  font-size: 28rpx;
+  padding: 20rpx;
+}
+
+.share-btn {
+  margin: 0;
+  padding: 20rpx;
+  line-height: normal;
+  font-size: 28rpx;
+}

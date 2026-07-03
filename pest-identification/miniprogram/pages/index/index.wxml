@@ -1,0 +1,73 @@
+<!-- pages/index/index.wxml - 首页 -->
+<view class="container">
+  <!-- 顶部搜索栏 -->
+  <view class="search-bar" bindtap="goSearch">
+    <view class="search-input">
+      <text class="search-icon">🔍</text>
+      <text class="search-placeholder">搜索病虫害名称...</text>
+    </view>
+  </view>
+
+  <!-- 拍照识别入口 -->
+  <view class="identify-entry card" bindtap="goIdentify">
+    <view class="identify-main">
+      <view class="identify-icon-wrap">
+        <text class="identify-icon">📷</text>
+      </view>
+      <view class="identify-text">
+        <text class="identify-title">拍照识别病虫害</text>
+        <text class="identify-desc">对准病叶或害虫拍照，AI秒识别</text>
+      </view>
+    </view>
+    <view class="identify-arrow">→</view>
+  </view>
+
+  <!-- 作物分类 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">按作物查看</text>
+    </view>
+    <view class="crop-grid">
+      <view
+        class="crop-item"
+        wx:for="{{crops}}"
+        wx:key="id"
+        bindtap="goCropPests"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+      >
+        <view class="crop-icon-wrap" style="background: {{item.bgColor || 'var(--color-bg-card)'}}">
+          <text class="crop-icon">{{item.icon}}</text>
+        </view>
+        <text class="crop-name">{{item.name}}</text>
+        <text class="crop-count">{{item.pest_count || 0}}种</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 常见病虫害 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">常见病虫害</text>
+      <text class="section-more" bindtap="goEncyclopedia">查看全部 →</text>
+    </view>
+    <view class="pest-list">
+      <view
+        class="pest-card card"
+        wx:for="{{hotPests}}"
+        wx:key="id"
+        bindtap="goDetail"
+        data-id="{{item.id}}"
+      >
+        <view class="pest-card-header">
+          <text class="pest-name">{{item.name}}</text>
+          <text class="{{item.type === '病害' ? 'tag-disease' : 'tag-pest'}}">{{item.type}}</text>
+        </view>
+        <text class="pest-summary">{{item.summary}}</text>
+        <view class="pest-crops">
+          <text class="pest-crop-tag" wx:for="{{item.crop_names}}" wx:for-item="crop" wx:key="*this">{{crop}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

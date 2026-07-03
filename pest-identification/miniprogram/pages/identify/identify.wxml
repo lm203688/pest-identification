@@ -1,0 +1,118 @@
+<!-- pages/identify/identify.wxml - 拍照识别页 -->
+<view class="container">
+  <view class="identify-hero">
+    <text class="hero-title">拍照识别</text>
+    <text class="hero-desc">对准病叶、害虫拍照，AI帮你识别</text>
+  </view>
+
+  <!-- 拍照区域 -->
+  <view class="camera-area" wx:if="{{!imagePath}}">
+    <view class="camera-placeholder" bindtap="takePhoto">
+      <view class="camera-icon-wrap">
+        <text class="camera-icon">📷</text>
+      </view>
+      <text class="camera-text">点击拍照</text>
+      <text class="camera-hint">或从相册选择</text>
+    </view>
+    <view class="camera-actions">
+      <view class="action-btn" bindtap="takePhoto">
+        <text class="action-icon">📸</text>
+        <text class="action-label">拍照</text>
+      </view>
+      <view class="action-btn" bindtap="chooseFromAlbum">
+        <text class="action-icon">🖼️</text>
+        <text class="action-label">相册</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预览区域 -->
+  <view class="preview-area" wx:if="{{imagePath}}">
+    <image class="preview-image" src="{{imagePath}}" mode="aspectFit" />
+    <view class="preview-actions">
+      <view class="btn-secondary" bindtap="retake">重新拍照</view>
+      <view class="btn-primary" bindtap="identify">开始识别</view>
+    </view>
+  </view>
+
+  <!-- 识别中 -->
+  <view class="loading-area" wx:if="{{identifying}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">AI正在识别中...</text>
+    <text class="loading-hint">通常需要3-5秒</text>
+  </view>
+
+  <!-- 识别结果 -->
+  <view class="result-area" wx:if="{{result}}">
+    <!-- AI识别成功 -->
+    <view class="result-card card" wx:if="{{result.confidence > 0}}">
+      <view class="result-header">
+        <text class="result-name">{{result.name}}</text>
+        <text class="{{result.type === '病害' ? 'tag-disease' : 'tag-pest'}}">{{result.type}}</text>
+      </view>
+      <view class="confidence-bar">
+        <view class="confidence-fill" style="width: {{result.confidence}}%"></view>
+        <text class="confidence-text">置信度 {{result.confidence}}%</text>
+      </view>
+      <text class="result-summary">{{result.summary}}</text>
+    </view>
+
+    <!-- AI识别失败，提供手动搜索 -->
+    <view class="result-card card" wx:if="{{result.confidence === 0}}">
+      <text class="result-name">未能识别</text>
+      <text class="result-summary">AI暂时无法识别这张图片，你可以手动搜索病虫害百科</text>
+      <view class="manual-search-box">
+        <input
+          class="search-input"
+          placeholder="输入病虫害名称或症状关键词"
+          value="{{searchKeyword}}"
+          bindinput="onSearchInput"
+          confirm-type="search"
+          bindconfirm="doSearch"
+        />
+        <view class="btn-primary" bindtap="doSearch">搜索百科</view>
+      </view>
+      <view class="search-results" wx:if="{{searchResults.length > 0}}">
+        <view
+          wx:for="{{searchResults}}"
+          wx:key="id"
+          class="search-result-item"
+          bindtap="goSearchDetail"
+          data-id="{{item.id}}"
+        >
+          <text class="search-result-name">{{item.name}}</text>
+          <text class="search-result-type">{{item.type}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="result-actions" wx:if="{{result.confidence > 0}}">
+      <view class="btn-primary" bindtap="goDetail">查看详情</view>
+      <view class="btn-secondary" bindtap="retake">重新识别</view>
+    </view>
+    <view class="result-actions" wx:if="{{result.confidence === 0}}">
+      <view class="btn-secondary" bindtap="retake">重新拍照</view>
+    </view>
+  </view>
+
+  <!-- 识别提示 -->
+  <view class="tips card" wx:if="{{!imagePath && !result}}">
+    <text class="tips-title">拍照技巧</text>
+    <view class="tip-item">
+      <text class="tip-dot">●</text>
+      <text class="tip-text">对准病斑或害虫特写，避免模糊</text>
+    </view>
+    <view class="tip-item">
+      <text class="tip-dot">●</text>
+      <text class="tip-text">尽量在自然光下拍摄</text>
+    </view>
+    <view class="tip-item">
+      <text class="tip-dot">●</text>
+      <text class="tip-text">一张照片只拍一种病虫害</text>
+    </view>
+    <view class="tip-item">
+      <text class="tip-dot">●</text>
+      <text class="tip-text">叶片正反面都拍效果更好</text>
+    </view>
+  </view>
+</view>

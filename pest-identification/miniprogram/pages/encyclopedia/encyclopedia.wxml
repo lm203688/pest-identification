@@ -1,0 +1,69 @@
+<!-- pages/encyclopedia/encyclopedia.wxml - 病虫害百科 -->
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input
+      class="search-input"
+      placeholder="搜索病虫害名称"
+      placeholder-class="search-placeholder"
+      value="{{keyword}}"
+      bindinput="onSearchInput"
+      bindconfirm="doSearch"
+      focus="{{focus}}"
+    />
+  </view>
+
+  <!-- 筛选 -->
+  <view class="filters">
+    <scroll-view class="filter-scroll" scroll-x>
+      <view
+        class="filter-chip {{activeCrop === 0 ? 'active' : ''}}"
+        bindtap="filterCrop"
+        data-id="0"
+      >全部</view>
+      <view
+        class="filter-chip {{activeCrop === item.id ? 'active' : ''}}"
+        wx:for="{{crops}}"
+        wx:key="id"
+        bindtap="filterCrop"
+        data-id="{{item.id}}"
+      >{{item.name}}</view>
+    </scroll-view>
+    <view class="type-filter">
+      <view class="type-chip {{activeType === '' ? 'active' : ''}}" bindtap="filterType" data-type="">全部</view>
+      <view class="type-chip type-disease {{activeType === '病害' ? 'active' : ''}}" bindtap="filterType" data-type="病害">病害</view>
+      <view class="type-chip type-pest {{activeType === '虫害' ? 'active' : ''}}" bindtap="filterType" data-type="虫害">虫害</view>
+    </view>
+  </view>
+
+  <!-- 列表 -->
+  <view class="pest-list">
+    <view
+      class="pest-card card"
+      wx:for="{{pestList}}"
+      wx:key="id"
+      bindtap="goDetail"
+      data-id="{{item.id}}"
+    >
+      <view class="pest-card-top">
+        <view class="pest-card-left">
+          <text class="pest-name">{{item.name}}</text>
+          <text class="{{item.type === '病害' ? 'tag-disease' : 'tag-pest'}}">{{item.type}}</text>
+        </view>
+      </view>
+      <text class="pest-summary">{{item.summary}}</text>
+      <text class="pest-crops-text" wx:if="{{item.crop_names}}">危害作物：{{item.crop_names}}</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{pestList.length === 0 && !loading}}">
+    <text class="icon">🔍</text>
+    <text>未找到相关病虫害</text>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">
+    <text>加载更多</text>
+  </view>
+</view>

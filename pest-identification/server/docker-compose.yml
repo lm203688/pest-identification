@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - DB_HOST=host.docker.internal
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=changeme
+      - DB_NAME=pest_identification
+      - KINDWISE_API_KEY=${KINDWISE_API_KEY:-}
+      - JWT_SECRET=pest_id_secret_2026
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

@@ -1,0 +1,183 @@
+/* pages/index/index.wxss */
+.container {
+  padding: var(--spacing-md);
+  padding-bottom: 180rpx;
+}
+
+/* 搜索栏 */
+.search-bar {
+  margin-bottom: var(--spacing-md);
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: 24rpx 32rpx;
+  border: 1rpx solid var(--color-border);
+}
+
+.search-icon {
+  font-size: 32rpx;
+  margin-right: 16rpx;
+}
+
+.search-placeholder {
+  color: var(--color-text-muted);
+  font-size: 28rpx;
+}
+
+/* 拍照识别入口 */
+.identify-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #1B4332, #2D6A4F);
+  padding: var(--spacing-lg) var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.identify-main {
+  display: flex;
+  align-items: center;
+}
+
+.identify-icon-wrap {
+  width: 96rpx;
+  height: 96rpx;
+  background: rgba(82, 183, 136, 0.2);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-sm);
+}
+
+.identify-icon {
+  font-size: 48rpx;
+}
+
+.identify-title {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.identify-desc {
+  display: block;
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  margin-top: 4rpx;
+}
+
+.identify-arrow {
+  font-size: 36rpx;
+  color: var(--color-accent);
+  font-weight: 300;
+}
+
+/* 作物分类网格 */
+.section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.section-more {
+  font-size: 24rpx;
+  color: var(--color-accent);
+}
+
+.crop-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-sm);
+}
+
+.crop-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+}
+
+.crop-icon-wrap {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12rpx;
+}
+
+.crop-icon {
+  font-size: 44rpx;
+}
+
+.crop-name {
+  font-size: 24rpx;
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.crop-count {
+  font-size: 20rpx;
+  color: var(--color-text-muted);
+  margin-top: 4rpx;
+}
+
+/* 病虫害列表 */
+.pest-card {
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.pest-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.pest-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.pest-summary {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 12rpx;
+}
+
+.pest-crops {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.pest-crop-tag {
+  font-size: 20rpx;
+  color: var(--color-accent);
+  background: rgba(82, 183, 136, 0.1);
+  padding: 4rpx 16rpx;
+  border-radius: 12rpx;
+}

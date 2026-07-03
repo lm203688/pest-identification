@@ -1,0 +1,106 @@
+/* 农识通 - 全局样式 */
+/* 设计语言：深色自然系 + 大留白 + 少装饰 */
+
+page {
+  --color-bg-primary: #0A1F14;
+  --color-bg-secondary: #132A1E;
+  --color-bg-card: #1B4332;
+  --color-bg-card-hover: #245740;
+  --color-text-primary: #E8F5E9;
+  --color-text-secondary: #8BA89A;
+  --color-text-muted: #5C7A6B;
+  --color-accent: #52B788;
+  --color-accent-light: #74C69D;
+  --color-danger: #E76F51;
+  --color-warning: #F4A261;
+  --color-disease: #E76F51;
+  --color-pest: #F4A261;
+  --color-healthy: #52B788;
+  --color-border: rgba(82, 183, 136, 0.15);
+  --radius-sm: 12rpx;
+  --radius-md: 20rpx;
+  --radius-lg: 32rpx;
+  --spacing-xs: 16rpx;
+  --spacing-sm: 24rpx;
+  --spacing-md: 40rpx;
+  --spacing-lg: 64rpx;
+  --spacing-xl: 96rpx;
+
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+/* 通用卡片 */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+/* 通用按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 24rpx 48rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-accent);
+  border: 2rpx solid var(--color-accent);
+  border-radius: var(--radius-md);
+  padding: 22rpx 46rpx;
+  font-size: 30rpx;
+  text-align: center;
+}
+
+/* 类型标签 */
+.tag-disease {
+  background: rgba(231, 111, 81, 0.15);
+  color: var(--color-disease);
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.tag-pest {
+  background: rgba(244, 162, 97, 0.15);
+  color: var(--color-pest);
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+/* 分隔线 */
+.divider {
+  height: 1rpx;
+  background: var(--color-border);
+  margin: var(--spacing-md) 0;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 60rpx;
+  color: var(--color-text-muted);
+  font-size: 28rpx;
+}
+
+.empty-state .icon {
+  font-size: 80rpx;
+  margin-bottom: 24rpx;
+}
