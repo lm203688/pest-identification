@@ -1,0 +1,13 @@
+{
+  "name": "农识通",
+  "description": "AI病虫害识别平台，82种病虫害知识库",
+  "url": "http://150.158.119.19:3002",
+  "capabilities": [
+    "POST /api/identify",
+    "GET /api/pest/?keyword=xxx",
+    "GET /api/pest/:id"
+  ],
+  "pricing": "免费3次/天识别 + 知识库免费浏览",
+  "authentication": "none (free tier) / API Key (paid)",
+  "contact": "support@aishield.tools"
+}
