@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>农识通 — AI病虫害识别专家</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f0fdf4;color:#1e293b;font-family:system-ui,sans-serif;line-height:1.6}
+.header{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.header h1{font-size:1.3rem}
+.header a{color:#dcfce7;text-decoration:none;margin-left:1rem}
+.search-section{padding:2rem;background:#fff;border-bottom:1px solid #e2e8f0}
+.search-box{max-width:600px;margin:0 auto;display:flex;gap:.5rem}
+.search-box input{flex:1;padding:.8rem;border:2px solid #16a34a;border-radius:8px;font-size:1rem}
+.search-box button{padding:.8rem 1.5rem;background:#16a34a;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.hero{text-align:center;padding:3rem 2rem;background:linear-gradient(180deg,#f0fdf4,#fff)}
+.hero h2{font-size:1.8rem;color:#16a34a;margin-bottom:.5rem}
+.hero p{color:#64748b;margin-bottom:2rem}
+.hero-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;max-width:800px;margin:0 auto}
+.hero-card{background:#fff;padding:1.5rem;border-radius:12px;border:2px solid #e2e8f0;text-align:center;cursor:pointer;transition:border-color .3s}
+.hero-card:hover{border-color:#16a34a}
+.hero-card .icon{font-size:2.5rem;margin-bottom:.5rem}
+.hero-card h3{color:#16a34a;margin-bottom:.3rem}
+.hero-card p{color:#64748b;font-size:.9rem}
+.crops{padding:2rem;max-width:1000px;margin:0 auto}
+.crops h2{color:#16a34a;margin-bottom:1rem}
+.crop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:.5rem}
+.crop-item{background:#fff;padding:1rem;border-radius:8px;border:1px solid #e2e8f0;text-align:center;cursor:pointer;transition:background .3s}
+.crop-item:hover{background:#f0fdf4}
+.pest-list{padding:2rem;max-width:1000px;margin:0 auto}
+.pest-list h2{color:#16a34a;margin-bottom:1rem}
+.pest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+.pest-card{background:#fff;padding:1rem;border-radius:8px;border:1px solid #e2e8f0;cursor:pointer;transition:border-color .3s}
+.pest-card:hover{border-color:#16a34a}
+.pest-card h3{color:#1e293b;font-size:1rem}
+.pest-card .type{display:inline-block;padding:.2rem .5rem;border-radius:4px;font-size:.8rem;margin-bottom:.3rem}
+.pest-card .type.病害{background:#fef3c7;color:#92400e}
+.pest-card .type.虫害{background:#fee2e2;color:#991b1b}
+.pest-card p{color:#64748b;font-size:.85rem}
+.detail-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:none;z-index:200;padding:2rem}
+.detail-modal.active{display:flex;align-items:center;justify-content:center}
+.detail-content{background:#fff;border-radius:12px;padding:2rem;max-width:600px;max-height:80vh;overflow-y:auto}
+.detail-content h2{color:#16a34a;margin-bottom:1rem}
+.detail-content h3{color:#16a34a;margin-top:1rem;margin-bottom:.5rem}
+.detail-content p{color:#374151;margin-bottom:.5rem}
+.detail-close{float:right;background:#ef4444;color:#fff;border:none;padding:.3rem .8rem;border-radius:4px;cursor:pointer}
+.upload-section{padding:2rem;max-width:600px;margin:0 auto;text-align:center}
+.upload-area{border:3px dashed #16a34a;border-radius:12px;padding:3rem;background:#f0fdf4;cursor:pointer;transition:background .3s}
+.upload-area:hover{background:#dcfce7}
+.upload-area .icon{font-size:3rem;margin-bottom:1rem}
+.upload-result{margin-top:1rem;padding:1rem;background:#fff;border-radius:8px;border:1px solid #e2e8f0;display:none}
+.upload-result.show{display:block}
+.warning{background:#fef3c7;border:1px solid #f59e0b;padding:1rem;border-radius:8px;margin-top:1rem;color:#92400e;font-size:.9rem}
+.footer{text-align:center;padding:2rem;background:#16a34a;color:#dcfce7}
+@media(max-width:768px){.hero-cards{grid-template-columns:1fr}.search-box{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>🌾 农识通 — AI病虫害识别</h1>
+<div><a href="#upload">拍照识别</a><a href="#knowledge">知识库</a></div>
+</div>
+
+<div class="search-section">
+<div class="search-box">
+<input type="text" id="search-input" placeholder="搜索病虫害名称，如：蚜虫、稻瘟病..." onkeypress="if(event.key==='Enter')searchPest()">
+<button onclick="searchPest()">🔍 搜索</button>
+</div>
+</div>
+
+<div class="hero">
+<h2>🌿 AI驱动的病虫害识别专家</h2>
+<p>82种病虫害知识库 · 拍照秒识别 · 18种作物覆盖</p>
+<div class="hero-cards">
+<div class="hero-card" onclick="document.getElementById('upload').scrollIntoView({behavior:'smooth'})">
+<div class="icon">📷</div><h3>拍照识别</h3><p>上传病叶照片，AI秒识别</p>
+</div>
+<div class="hero-card" onclick="loadPests()">
+<div class="icon">📚</div><h3>知识库</h3><p>82种病虫害详细信息</p>
+</div>
+<div class="hero-card" onclick="loadCrops()">
+<div class="icon">🌾</div><h3>按作物查</h3><p>18种作物分类浏览</p>
+</div>
+<div class="hero-card" onclick="document.getElementById('search-input').focus()">
+<div class="icon">🔍</div><h3>搜索</h3><p>输入名称快速查找</p>
+</div>
+</div>
+</div>
+
+<div id="crops-section" class="crops" style="display:none">
+<h2>🌾 按作物浏览</h2>
+<div id="crop-grid" class="crop-grid"></div>
+</div>
+
+<div id="knowledge" class="pest-list">
+<h2>📋 病虫害知识库</h2>
+<div id="pest-grid" class="pest-grid"></div>
+</div>
+
+<div id="upload" class="upload-section">
+<h2 style="color:#16a34a;margin-bottom:1rem">📷 拍照识别病虫害</h2>
+<div class="upload-area" onclick="document.getElementById('file-input').click()">
+<div class="icon">📸</div>
+<p style="color:#16a34a;font-size:1.1rem;font-weight:600">点击上传病叶或害虫照片</p>
+<p style="color:#64748b;font-size:.9rem;margin-top:.5rem">支持JPG/PNG，最大10MB</p>
+</div>
+<input type="file" id="file-input" accept="image/*" style="display:none" onchange="uploadImage(event)">
+<div id="upload-result" class="upload-result"></div>
+<div class="warning">
+⚠️ <strong>数据准确性提示：</strong>请确保上传的照片清晰、真实。错误的信息会导致识别结果不准确。上传前请确认：<br>
+1. 照片清晰可见病斑/虫体特征<br>
+2. 拍摄的是受影响的植物部位（叶片/果实/茎干）<br>
+3. 信息仅供参考，建议咨询专业农技人员
+</div>
+</div>
+
+<div class="footer">
+<p>© 2026 农识通 · AI病虫害识别 · 82种知识库 · 18种作物</p>
+</div>
+
+<div id="detail-modal" class="detail-modal" onclick="if(event.target===this)closeDetail()">
+<div class="detail-content" id="detail-content"></div>
+</div>
+
+<script>
+const API = 'http://150.158.119.19:3002';
+
+async function loadCrops() {
+document.getElementById('crops-section').style.display = 'block';
+const grid = document.getElementById('crop-grid');
+grid.innerHTML = '<p style="color:#64748b">加载中...</p>';
+try {
+const resp = await fetch(API + '/api/crop/');
+const data = await resp.json();
+if (data.list) {
+grid.innerHTML = data.list.map(c => `<div class="crop-item" onclick="searchPestByCrop(${c.id},'${c.name}')"><div style="font-size:1.5rem">🌾</div><div>${c.name}</div><div style="font-size:.8rem;color:#64748b">${c.category}</div></div>`).join('');
+}
+} catch(e) { grid.innerHTML = '<p style="color:#ef4444">加载失败</p>'; }
+}
+
+async function loadPests() {
+document.getElementById('knowledge').scrollIntoView({behavior:'smooth'});
+const grid = document.getElementById('pest-grid');
+grid.innerHTML = '<p style="color:#64748b">加载中...</p>';
+try {
+const resp = await fetch(API + '/api/pest/?page=1&pageSize=50');
+const data = await resp.json();
+if (data.list) {
+grid.innerHTML = data.list.map(p => `<div class="pest-card" onclick="showDetail(${p.id})"><span class="type ${p.type}">${p.type}</span><h3>${p.name}</h3><p>${(p.summary||'').substring(0,60)}...</p></div>`).join('');
+}
+} catch(e) { grid.innerHTML = '<p style="color:#ef4444">加载失败</p>'; }
+}
+
+async function searchPest() {
+const kw = document.getElementById('search-input').value;
+if (!kw) return;
+const grid = document.getElementById('pest-grid');
+document.getElementById('knowledge').scrollIntoView({behavior:'smooth'});
+grid.innerHTML = '<p style="color:#64748b">搜索中...</p>';
+try {
+const resp = await fetch(API + '/api/pest/?keyword=' + encodeURIComponent(kw));
+const data = await resp.json();
+if (data.list && data.list.length > 0) {
+grid.innerHTML = data.list.map(p => `<div class="pest-card" onclick="showDetail(${p.id})"><span class="type ${p.type}">${p.type}</span><h3>${p.name}</h3><p>${(p.summary||'').substring(0,60)}...</p></div>`).join('');
+} else {
+grid.innerHTML = '<p style="color:#64748b">未找到"' + kw + '"相关病虫害</p>';
+}
+} catch(e) { grid.innerHTML = '<p style="color:#ef4444">搜索失败</p>'; }
+}
+
+function searchPestByCrop(id, name) {
+document.getElementById('search-input').value = name;
+searchPest();
+}
+
+async function showDetail(id) {
+const modal = document.getElementById('detail-modal');
+const content = document.getElementById('detail-content');
+modal.classList.add('active');
+content.innerHTML = '<p style="color:#64748b">加载中...</p>';
+try {
+const resp = await fetch(API + '/api/pest/' + id);
+const data = await resp.json();
+if (data.pest) {
+const p = data.pest;
+content.innerHTML = `<button class="detail-close" onclick="closeDetail()">✕</button>
+<h2>${p.name}</h2>
+<p style="color:#64748b">别名: ${p.aliases||'无'}</p>
+<span class="type ${p.type}">${p.type}</span>
+<h3>📋 简介</h3><p>${p.summary||'无'}</p>
+<h3>🔍 症状</h3><p>${p.symptoms||'无'}</p>
+<h3>🌡️ 发病条件</h3><p>${p.conditions||'无'}</p>
+<h3>💊 防治方案</h3><p>${p.prevention||'无'}</p>
+<h3>💉 推荐用药</h3><p>${p.medicine||'无'}</p>`;
+} else {
+content.innerHTML = '<p>未找到详情</p>';
+}
+} catch(e) { content.innerHTML = '<p style="color:#ef4444">加载失败</p>'; }
+}
+
+function closeDetail() {
+document.getElementById('detail-modal').classList.remove('active');
+}
+
+async function uploadImage(event) {
+const file = event.target.files[0];
+if (!file) return;
+const result = document.getElementById('upload-result');
+result.classList.add('show');
+result.innerHTML = '<p style="color:#16a34a">⏳ AI识别中...</p>';
+const formData = new FormData();
+formData.append('image', file);
+formData.append('user_id', 'web_guest');
+try {
+const resp = await fetch(API + '/api/identify', { method: 'POST', body: formData });
+const data = await resp.json();
+if (data.result) {
+result.innerHTML = '<h3 style="color:#16a34a">✅ 识别结果</h3><p><strong>病虫害:</strong> ' + (data.result.name||'未知') + '</p><p><strong>置信度:</strong> ' + (data.result.confidence||'N/A') + '</p><p><strong>类型:</strong> ' + (data.result.type||'未知') + '</p><p style="margin-top:.5rem;color:#64748b;font-size:.9rem">建议查看知识库了解防治方案</p>';
+} else {
+result.innerHTML = '<p style="color:#f59e0b">⚠️ ' + (data.error||'识别失败，请尝试更清晰的照片') + '</p>';
+}
+} catch(e) {
+result.innerHTML = '<p style="color:#ef4444">⚠️ 识别服务暂不可用，请稍后重试</p>';
+}
+}
+
+// 自动加载病虫害列表
+loadPests();
+</script>
+</body>
+</html>
