@@ -11,6 +11,9 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+// 静态文件服务（Web前端）
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
 // 路由
 const pestRoutes = require('./routes/pest');
 const identifyRoutes = require('./routes/identify');
